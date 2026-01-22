@@ -53,7 +53,7 @@ export default function Home() {
               <p className="text-lg text-gray-300 leading-relaxed italic font-bold">
                 We spend our lives becoming. Each moment, each choice, each quiet conviction shapes 
                 the contours of who we are. Yet how often do we pause to witness this unfolding? 
-                aruform is not just a journaling app—it's an invitation to sit with yourself. Not 
+                aruform is not just a journaling app—it&apos;s an invitation to sit with yourself. Not 
                 merely to record what you did, but to trace the beliefs that move beneath the surface. 
                 To ask what you hold as true, and to watch, with gentle curiosity, how these truths 
                 are sculpting the person you are learning to be.

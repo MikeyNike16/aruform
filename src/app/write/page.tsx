@@ -111,7 +111,7 @@ export default function WritePage() {
             <p className="text-sm text-gray-300 italic leading-relaxed mb-3">
               <span className="font-semibold text-blue-400">Note:</span> AI will thoughtfully analyze 
               your journaling to offer both support for your beliefs and counterpoints to consider. 
-              This isn't about proving you wrong—it's about keeping your mind open, exploring different 
+              This isn&apos;t about proving you wrong—it&apos;s about keeping your mind open, exploring different 
               perspectives, and broadening your horizons as you become.
             </p>
             <p className="text-xs text-gray-400 italic leading-relaxed border-t border-gray-700 pt-3">
