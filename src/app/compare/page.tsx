@@ -10,7 +10,7 @@ interface Snapshot {
   summary: string;
   snapshotData?: {
     selfDescription: string;
-    coreValues: Array<{ value: string; explanation: string }>;
+    coreValues: Array<{ value: string; explanation?: string }>;
     beliefs: {
       freeWill: string;
       meaning: string;
@@ -232,12 +232,12 @@ export default function ComparePage() {
                 rightLabel={`Me at ${rightYear}`}
                 leftText={
                   leftSnapshot.snapshotData?.coreValues 
-                    ? leftSnapshot.snapshotData.coreValues.map(v => `${v.value}: ${v.explanation}`).join("\n\n")
+                    ? leftSnapshot.snapshotData.coreValues.map(v => v.explanation ? `${v.value}: ${v.explanation}` : v.value).join("\n\n")
                     : leftSnapshot.snapshotAnswers?.values || ""
                 }
                 rightText={
                   rightSnapshot.snapshotData?.coreValues
-                    ? rightSnapshot.snapshotData.coreValues.map(v => `${v.value}: ${v.explanation}`).join("\n\n")
+                    ? rightSnapshot.snapshotData.coreValues.map(v => v.explanation ? `${v.value}: ${v.explanation}` : v.value).join("\n\n")
                     : rightSnapshot.snapshotAnswers?.values || ""
                 }
                 status={getComparisonStatus(

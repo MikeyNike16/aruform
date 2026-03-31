@@ -1,15 +1,33 @@
-"use client";
+import type { Metadata } from "next";
 
 import "./globals.css";
+import { FloatingQuotes } from "@/components/FloatingQuotes";
+import { Analytics } from "@/components/Analytics";
 
-const quotes = [
-  { text: "\"Know thyself\"", author: "— Socrates", delay: 0, duration: 40, top: "15%" },
-  { text: "\"I am what I choose to become\"", author: "— Jung", delay: 15, duration: 42, top: "50%" },
-  { text: "\"To find yourself, think for yourself\"", author: "— Socrates", delay: 30, duration: 45, top: "25%" },
-  { text: "\"Become who you truly are\"", author: "— Jung", delay: 45, duration: 40, top: "65%" },
-  { text: "\"The self is well hidden\"", author: "— Nietzsche", delay: 60, duration: 43, top: "40%" },
-  { text: "\"To thine own self be true\"", author: "— Shakespeare", delay: 75, duration: 42, top: "80%" },
-];
+const SITE_NAME = "aruform";
+const SITE_URL = "https://aruform.com";
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — existential journaling`,
+    template: `%s — ${SITE_NAME}`,
+  },
+  description: "Reflect deeply, track emotional patterns, and understand who you're becoming.",
+  applicationName: SITE_NAME,
+  openGraph: {
+    type: "website",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — existential journaling`,
+    description: "Reflect deeply, track emotional patterns, and understand who you're becoming.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} — existential journaling`,
+    description: "Reflect deeply, track emotional patterns, and understand who you're becoming.",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -18,27 +36,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <title>aruform - existential journaling</title>
-        <meta name="description" content="Explore your existence through reflective journaling" />
-      </head>
       <body className="antialiased">
-        {quotes.map((quote, index) => (
-          <div
-            key={index}
-            className="floating-quote"
-            style={{
-              top: quote.top,
-              animationDelay: `${quote.delay}s`,
-              animationDuration: `${quote.duration}s`,
-            }}
-          >
-            {quote.text} {quote.author}
-          </div>
-        ))}
-        <div style={{ position: 'relative', zIndex: 10 }}>
-          {children}
-        </div>
+        <Analytics />
+        <FloatingQuotes />
+        <div style={{ position: "relative", zIndex: 10 }}>{children}</div>
       </body>
     </html>
   );

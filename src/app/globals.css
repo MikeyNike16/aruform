@@ -127,6 +127,16 @@ body::after {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+  .floating-quote {
+    display: none;
+    animation: none;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

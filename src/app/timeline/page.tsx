@@ -10,7 +10,7 @@ interface Snapshot {
   summary: string;
   snapshotData?: {
     selfDescription: string;
-    coreValues: Array<{ value: string; explanation: string }>;
+    coreValues: Array<{ value: string; explanation?: string }>;
     beliefs: {
       freeWill: string;
       meaning: string;
@@ -164,7 +164,9 @@ export default function TimelinePage() {
                                   {snapshot.snapshotData.coreValues.map((v, i) => (
                                     <div key={i} className="pl-3 border-l-2 border-blue-600">
                                       <div className="font-medium text-gray-200 text-sm">{v.value}</div>
-                                      <div className="text-gray-400 text-xs">{v.explanation}</div>
+                                      {v.explanation ? (
+                                        <div className="text-gray-400 text-xs">{v.explanation}</div>
+                                      ) : null}
                                     </div>
                                   ))}
                                 </div>
