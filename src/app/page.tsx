@@ -52,25 +52,38 @@ export default function Home() {
             <div className="max-w-2xl mx-auto mb-12">
               <p className="text-lg text-gray-300 leading-relaxed italic font-bold">
                 We spend our lives becoming. Each moment, each choice, each quiet conviction shapes 
-                the contours of who we are. Yet how often do we pause to witness this unfolding? 
-                aruform is not just a journaling app—it&apos;s an invitation to sit with yourself. Not 
-                merely to record what you did, but to trace the beliefs that move beneath the surface. 
-                To ask what you hold as true, and to watch, with gentle curiosity, how these truths 
-                are sculpting the person you are learning to be.
+                the contours of who we are. Yet how often do we pause to witness this unfolding?
+              </p>
+              <p className="text-base text-gray-400 leading-relaxed mt-4">
+                aruform is not for daily use. It&apos;s for <span className="text-gray-200 font-semibold">life-use</span>. 
+                Once a year, capture who you are—your values, beliefs, direction. 
+                Then watch how the chapters of your identity unfold across time.
               </p>
             </div>
-            <div className="flex gap-4 justify-center">
+            <div className="flex gap-4 justify-center flex-wrap">
               <Link
                 href="/write"
-                className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                className="px-8 py-3 bg-stone-50 text-stone-800 rounded-lg hover:bg-stone-100 transition-all font-medium shadow-sm hover:shadow-md"
               >
-                Start Writing
+                Write Entry
               </Link>
               <Link
-                href="/entries"
-                className="px-8 py-3 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors font-semibold"
+                href="/snapshot"
+                className="px-8 py-3 bg-amber-50 text-amber-900 rounded-lg hover:bg-amber-100 transition-all font-medium shadow-sm hover:shadow-md border border-amber-100"
               >
-                View Entries
+                Create Snapshot
+              </Link>
+              <Link
+                href="/timeline"
+                className="px-8 py-3 bg-slate-50 text-slate-800 rounded-lg hover:bg-slate-100 transition-all font-medium shadow-sm hover:shadow-md"
+              >
+                View Timeline
+              </Link>
+              <Link
+                href="/compare"
+                className="px-8 py-3 bg-slate-50 text-slate-800 rounded-lg hover:bg-slate-100 transition-all font-medium shadow-sm hover:shadow-md"
+              >
+                Compare
               </Link>
             </div>
           </section>
@@ -251,10 +264,10 @@ export default function Home() {
               </div>
               <div className="mt-6 text-center">
                 <Link
-                  href="/write"
+                  href="/snapshot"
                   className="inline-block px-6 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-gray-700 transition-colors text-sm"
                 >
-                  Update Your Snapshot
+                  Create Your Snapshot
                 </Link>
               </div>
             </div>

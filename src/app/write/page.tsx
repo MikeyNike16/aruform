@@ -1,17 +1,67 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function WritePage() {
+  const router = useRouter();
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
   const [mood, setMood] = useState(5);
   const [energy, setEnergy] = useState(5);
   const [stress, setStress] = useState(5);
 
+  // Analyze content and auto-adjust mood/energy/stress
+  useEffect(() => {
+    if (content.length < 50) return; // Wait for some content
+
+    const text = content.toLowerCase();
+    
+    // Mood keywords
+    const positiveWords = ['happy', 'joy', 'excited', 'grateful', 'amazing', 'wonderful', 'love', 'great', 'good', 'better', 'beautiful', 'peaceful', 'content', 'hopeful', 'optimistic', 'proud', 'blessed'];
+    const negativeWords = ['sad', 'depressed', 'anxious', 'worried', 'angry', 'frustrated', 'upset', 'terrible', 'awful', 'bad', 'worse', 'hate', 'lonely', 'empty', 'lost', 'hopeless', 'miserable'];
+    
+    // Energy keywords
+    const highEnergyWords = ['energized', 'motivated', 'active', 'excited', 'productive', 'ambitious', 'driven', 'focused', 'ready', 'pumped'];
+    const lowEnergyWords = ['tired', 'exhausted', 'drained', 'fatigued', 'sleepy', 'lethargic', 'unmotivated', 'lazy', 'burnt out', 'weary'];
+    
+    // Stress keywords
+    const stressedWords = ['stressed', 'overwhelmed', 'anxious', 'pressure', 'worried', 'panic', 'tense', 'nervous', 'frantic', 'struggling', 'difficult', 'hard', 'challenging'];
+    const calmWords = ['calm', 'relaxed', 'peaceful', 'tranquil', 'serene', 'easy', 'simple', 'manageable', 'comfortable', 'balanced'];
+    
+    // Count occurrences
+    const positiveCount = positiveWords.filter(word => text.includes(word)).length;
+    const negativeCount = negativeWords.filter(word => text.includes(word)).length;
+    const highEnergyCount = highEnergyWords.filter(word => text.includes(word)).length;
+    const lowEnergyCount = lowEnergyWords.filter(word => text.includes(word)).length;
+    const stressedCount = stressedWords.filter(word => text.includes(word)).length;
+    const calmCount = calmWords.filter(word => text.includes(word)).length;
+    
+    // Calculate mood (1-10 scale)
+    const moodDiff = positiveCount - negativeCount;
+    const newMood = Math.max(1, Math.min(10, 5 + moodDiff));
+    
+    // Calculate energy (1-10 scale)
+    const energyDiff = highEnergyCount - lowEnergyCount;
+    const newEnergy = Math.max(1, Math.min(10, 5 + energyDiff));
+    
+    // Calculate stress (1-10 scale, higher is more stressed)
+    const stressDiff = stressedCount - calmCount;
+    const newStress = Math.max(1, Math.min(10, 5 + stressDiff));
+    
+    // Update values
+    setMood(newMood);
+    setEnergy(newEnergy);
+    setStress(newStress);
+  }, [content]);
+
   const handleSave = () => {
-    // For now, just save to localStorage
+    if (!content.trim()) {
+      alert("Please write something before saving!");
+      return;
+    }
+
     const entry = {
       id: Date.now(),
       title: title || "Untitled Entry",
@@ -22,16 +72,17 @@ export default function WritePage() {
       stress,
     };
 
-    const entries = JSON.parse(localStorage.getItem("entries") || "[]");
-    entries.unshift(entry);
-    localStorage.setItem("entries", JSON.stringify(entries));
-
-    alert("Entry saved!");
-    setTitle("");
-    setContent("");
-    setMood(5);
-    setEnergy(5);
-    setStress(5);
+    try {
+      const entries = JSON.parse(localStorage.getItem("entries") || "[]");
+      entries.unshift(entry);
+      localStorage.setItem("entries", JSON.stringify(entries));
+      
+      // Redirect to entries page to confirm save
+      router.push("/entries");
+    } catch (error) {
+      console.error("Error saving entry:", error);
+      alert("Failed to save entry. Please try again.");
+    }
   };
 
   return (
@@ -41,16 +92,16 @@ export default function WritePage() {
           <Link href="/" className="text-2xl font-bold">
             aruform
           </Link>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <Link
               href="/entries"
-              className="px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors"
+              className="px-4 py-2 bg-amber-50 text-amber-900 rounded-lg hover:bg-amber-100 transition-all font-medium shadow-sm hover:shadow-md border border-amber-100"
             >
               View Entries
             </Link>
             <button
               onClick={handleSave}
-              className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-4 py-2 bg-stone-50 text-stone-800 rounded-lg hover:bg-stone-100 transition-all font-medium shadow-sm hover:shadow-md"
             >
               Save Entry
             </button>
@@ -61,7 +112,8 @@ export default function WritePage() {
       <main className="flex-1 container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="mb-6 p-4 border border-gray-700 bg-gray-900 bg-opacity-50 rounded-lg">
-            <h3 className="text-sm font-semibold mb-4 text-gray-200">How are you feeling?</h3>
+            <h3 className="text-sm font-semibold mb-2 text-gray-200">How are you feeling?</h3>
+            <p className="text-xs text-gray-400 mb-4 italic">Auto-adjusting based on what you write...</p>
             <div className="space-y-3">
               <div>
                 <div className="flex justify-between items-center mb-2">
