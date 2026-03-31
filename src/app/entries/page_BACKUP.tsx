@@ -1,1 +1,2 @@
-BACKUP OF BROKEN FILE
+// Backup placeholder file kept intentionally.
+export {};

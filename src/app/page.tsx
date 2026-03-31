@@ -147,7 +147,7 @@ export default function Home() {
               a place to meet yourself
             </h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Reflect deeply, track emotional patterns, and understand who you're becoming.
+              Reflect deeply, track emotional patterns, and understand who you&apos;re becoming.
             </p>
 
             <div className="flex gap-4 justify-center flex-wrap">

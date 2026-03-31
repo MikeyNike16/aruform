@@ -29,7 +29,7 @@ export default function OpenGraphImage() {
           existential journaling
         </div>
         <div style={{ fontSize: 24, marginTop: 28, opacity: 0.7 }}>
-          Reflect deeply, track emotional patterns, and understand who you're becoming.
+          Reflect deeply, track emotional patterns, and understand who you&apos;re becoming.
         </div>
         <div style={{ marginTop: 44, fontSize: 18, opacity: 0.6 }}>
           aruform.com

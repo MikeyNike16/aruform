@@ -552,7 +552,7 @@ export default function WritePage() {
 
               {analysisResult.validatingArguments && analysisResult.validatingArguments.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-sm font-semibold text-emerald-400 mb-3">Why You're Right to Feel This Way</h3>
+                  <h3 className="text-sm font-semibold text-emerald-400 mb-3">Why You&apos;re Right to Feel This Way</h3>
                   <ul className="space-y-2">
                     {analysisResult.validatingArguments.map((arg, i) => (
                       <li key={i} className="flex gap-3">
